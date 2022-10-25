@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, Button, StyleSheet, Image, TouchableOpacity, TextInput } from 'react-native';
 import Onboarding from 'react-native-onboarding-swiper';
 import { SafeAreaView } from 'react-navigation';
 
@@ -44,12 +44,21 @@ const OnboardingScreen = ({setFirstLaunch}) =>{
               backgroundColor: '#fff',
               image: <Image   style={{height: '60%', width: '90%', resizeMode:'contain', marginBottom:-200}} source={require('../image/testing.png')} />,
               title: <Text style={{fontWeight:'bold', textAlign:'center', color:'#A0CE4E', fontSize:19, margin:12,  marginTop: -70}}>Welcome to STEDI  Balance</Text>,
-              subtitle: 'STEDI Balance will now send a text with a code',
+              subtitle: (
+                <View>
+                  <Text style={{fontWeight:'bold', textAlign:'center', color:'#A0CE4E', fontSize:19, margin:12,  marginTop: -70}}>Enter phone number to send text</Text>
+                  <TextInput 
+                  placeholder="Phone Number"
+                  style={{textAlign:'center', color: '#080808', fontSize:19, margin:12,  marginTop: -70}}
+                  >Enter Phone Number Homie</TextInput>
+
+                </View>
+              ),
             },
             {
                 backgroundColor: '#fff',
                 image: <Image style={{height: '60%', width: '80%', resizeMode:'contain', marginBottom:-100}} source={require('../image/yeah.png')} />,
-                title: <Text style={{fontWeight:'bold', fontSize: 19, margin:15, textAlign:'center', color:'#A0CE4E', marginTop: -130 }}>Congratulations!</Text>,
+                title: <Text style={{fontWeight:'bold', fontSize: 19, margin:15, textAlign:'center', color:'#A0CE4E', marginTop: -130 }}>Get Rekt Nerd!</Text>,
                 subtitle: 'You have created a profile with STEDI Balance',
               },
               {
@@ -76,9 +85,8 @@ const OnboardingScreen = ({setFirstLaunch}) =>{
 export default OnboardingScreen;
 const styles = StyleSheet.create({
     container:{
-        flex:1, 
+        flex:1,
         alignItems:'center',
         justifyContent: 'center'
     }
 })
-

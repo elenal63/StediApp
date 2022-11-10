@@ -28,6 +28,7 @@ const App = () =>{
 
       if(validateResponse.status == 200){
         const userEmail = await validateResponse.text();
+        await AsyncStorage.setItem('userName', userEmail);
         console.log('userEmail', userEmail);
         setIsLoggedIn(true);
       }
@@ -58,7 +59,7 @@ return(
           onPress={async()=>{
             console.log('Button was pressed')
 
-            await fetch(
+            const sendTextResponse = await fetch(
               'https://dev.stedi.me/twofactorlogin/'+ phoneNumber,
               {
 
@@ -68,7 +69,12 @@ return(
                 }
               }
             )
+            if (sendTextResponse.status!=200){
+              Alert('Communication Error', 'Server responded to send text with status: ' + sendTextResponse.status);
+            }
           }}
+    
+          
         />      
         <TextInput 
         value={tempCode}
@@ -108,6 +114,7 @@ return(
               else{
                 console.log("token resonce Status",loginResponse.status)
                 Alert.alert('Warning' , 'An invalid Code was entered')
+                setIsLoggedIn(false);
               }
 
           }}

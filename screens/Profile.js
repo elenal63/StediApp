@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, Image, SafeAreaView , Share, ScrollView, Button
 import { Card, CardTitle, CardContent} from 'react-native-material-cards';
 import BarChart from 'react-native-bar-chart';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {Camera} from 'expo-camera';
+import {Camera, CameraType} from 'expo-camera';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 // import Share from 'react-native-share';
 
@@ -53,13 +53,13 @@ const Profile = (props) => {
   if(profilePhoto==null){
     return (
       <View style={styles.container}>
-      <Camera style={styles.camera} ref={cameraRef} onCameraReady={()=>{setCameraReady(true)}}>
+      <Camera style={styles.camera} ref={cameraRef} onCameraReady={()=>{setCameraReady(true)}} type={CameraType.front}>
         <View style={styles.buttonContainer}>
-          {cameraReady?<TouchableOpacity style={style.button} onPress={async()=> {
+          {cameraReady?<TouchableOpacity style={styles.button} onPress={async()=> {
 
             const picture = await cameraRef.current.takePictureAsync(cameraOptions)
             console.log('Picture', picture);
-            await AsyncStorage.setItem('profilePhoto', picture.url);
+            await AsyncStorage.setItem('profilePhoto', picture.uri);
             setProfilePhoto(picture.url);
 
           }}>
@@ -85,7 +85,7 @@ shadowRadius: 2.62,
 elevation: 4}}>
      <CardContent>
      <Image style={{height: 100, width:100, borderRadius: 75}}
-      source={{url:profilePhoto}} />
+      source={{uri:profilePhoto}} />
     <Text style={{marginTop:10,marginBottom:10,fontWeight: 'bold'}}>{userName}</Text>
 
     <Text style={{marginTop:20,marginBottom:2}}>This Week's progress</Text>
@@ -122,6 +122,6 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: 'white',
+    color: 'black',
   },
 });

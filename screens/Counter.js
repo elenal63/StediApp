@@ -98,15 +98,15 @@ stepPoints  = [];
    previousTime = stepObject.time;
    stepPoints.push(stepTime);
 }); 
-stepPoints.length=30;
+//stepPoints.length=30;
   try{
-    const tokenResponse = await fetch('https://dev.stedi.me/login',{
-  method: 'POST',
-  body:JSON.stringify({
-    userName: "rom19010@byui.edu",
-    password:"Patricia2596@"
-  })
-});
+//     const tokenResponse = await fetch('https://dev.stedi.me/login',{
+//   method: 'POST',
+//   body:JSON.stringify({
+//     userName: "rom19010@byui.edu",
+//     password:"Patricia2596@"
+//   })
+// });
 
  token.current = await tokenResponse.text();
 console.log('token:' ,token.current);
